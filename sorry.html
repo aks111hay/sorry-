@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorry Riya ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(-45deg, #ff6b6b, #ff8e8e, #ffa8a8, #ffb3b3);
+            background-size: 400% 400%;
+            animation: gradientShift 5s ease infinite;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 20px;
+            animation: floatHearts 6s linear infinite;
+        }
+
+        @keyframes floatHearts {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .sorry-box {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            transform: scale(0);
+            animation: bounceIn 1s ease-out 0.5s forwards;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #ff4757;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .message {
+            font-size: 1.3em;
+            color: #333;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .accept-btn {
+            background: linear-gradient(45deg, #2ed573, #7bed9f);
+            color: white;
+            box-shadow: 0 4px 15px rgba(46, 213, 115, 0.4);
+        }
+
+        .accept-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(46, 213, 115, 0.6);
+        }
+
+        .reject-btn {
+            background: linear-gradient(45deg, #ff4757, #ff6b7a);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+            position: relative;
+        }
+
+        .reject-btn:hover {
+            animation: runAway 0.5s ease-out;
+        }
+
+        @keyframes runAway {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-50px); }
+            50% { transform: translateX(50px); }
+            75% { transform: translateX(-30px); }
+            100% { transform: translateX(30px); }
+        }
+
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .popup.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            transform: scale(0.7);
+            transition: transform 0.3s ease;
+        }
+
+        .popup.show .popup-content {
+            transform: scale(1);
+        }
+
+        .emoji {
+            font-size: 4em;
+            margin-bottom: 20px;
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .close-attempts {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            color: #ff4757;
+            z-index: 100;
+        }
+
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+            20%, 40%, 60%, 80% { transform: translateX(10px); }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5em; }
+            .message { font-size: 1.1em; }
+            .buttons { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="close-attempts" id="closeAttempts">
+        Escape attempts: <span id="attemptCount">0</span>
+    </div>
+
+    <div class="container">
+        <div class="sorry-box" id="sorryBox">
+            <h1>Sorry Riya! 💕</h1>
+            <div class="message" id="message">
+                I messed up and I know it. You mean the world to me, and I can't bear the thought of you being upset because of me. Please forgive me? 🥺
+            </div>
+            <div class="buttons">
+                <button class="accept-btn" onclick="acceptApology()">I Forgive You ❤️</button>
+                <button class="reject-btn" onclick="rejectApology()" id="rejectBtn">No Way! 😤</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup" id="successPopup">
+        <div class="popup-content">
+            <div class="emoji">🎉</div>
+            <h2>Thank you, Riya!</h2>
+            <p>You're the best! I promise to do better. Love you! ❤️</p>
+            <button onclick="closeSuccess()" style="margin-top: 20px; padding: 10px 20px; background: #ff6b6b; color: white; border: none; border-radius: 10px; cursor: pointer;">Close</button>
+        </div>
+    </div>
+
+    <div class="popup" id="rejectPopup">
+        <div class="popup-content">
+            <div class="emoji">😢</div>
+            <h2>Please Riya!</h2>
+            <p id="rejectMessage">I really am sorry! Give me another chance?</p>
+            <button onclick="closeReject()" style="margin-top: 20px; padding: 10px 20px; background: #ff6b6b; color: white; border: none; border-radius: 10px; cursor: pointer;">Try Again</button>
+        </div>
+    </div>
+
+    <script>
+        let attempts = 0;
+        let rejectCount = 0;
+        let isAccepted = false;
+        
+        const messages = [
+            "I messed up and I know it. You mean the world to me, and I can't bear the thought of you being upset because of me. Please forgive me? 🥺",
+            "Come on Riya, you know I love you more than anything! I'm really, truly sorry! 💕",
+            "I promise I'll make it up to you! Just give me one more chance? 🙏",
+            "Your smile is worth more than anything to me. Please don't stay mad? 😊",
+            "I'll do anything to make this right! You're my everything, Riya! ✨"
+        ];
+
+        const rejectMessages = [
+            "I really am sorry! Give me another chance?",
+            "Please don't be so harsh! I promise I've learned my lesson! 🥺",
+            "My heart is breaking! Please forgive me, Riya! 💔",
+            "I can't live with myself knowing you're angry with me! 😭",
+            "Fine, I'll keep trying until you say yes! You can't escape! 😏"
+        ];
+
+        // Create floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '💖';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            document.getElementById('hearts').appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        setInterval(createHeart, 500);
+
+        // Prevent page from closing/leaving
+        window.addEventListener('beforeunload', function(e) {
+            if (!isAccepted) {
+                attempts++;
+                document.getElementById('attemptCount').textContent = attempts;
+                e.preventDefault();
+                e.returnValue = 'Riya, you can\'t leave until you forgive me! 😢';
+                return 'Riya, you can\'t leave until you forgive me! 😢';
+            }
+        });
+
+        // Prevent back button
+        history.pushState(null, null, location.href);
+        window.addEventListener('popstate', function(event) {
+            if (!isAccepted) {
+                attempts++;
+                document.getElementById('attemptCount').textContent = attempts;
+                history.pushState(null, null, location.href);
+                document.getElementById('sorryBox').classList.add('shake');
+                setTimeout(() => {
+                    document.getElementById('sorryBox').classList.remove('shake');
+                }, 500);
+            }
+        });
+
+        function acceptApology() {
+            isAccepted = true;
+            document.getElementById('successPopup').classList.add('show');
+        }
+
+        function rejectApology() {
+            rejectCount++;
+            document.getElementById('rejectPopup').classList.add('show');
+            document.getElementById('rejectMessage').textContent = rejectMessages[Math.min(rejectCount - 1, rejectMessages.length - 1)];
+            
+            // Make the reject button harder to click
+            const btn = document.getElementById('rejectBtn');
+            btn.style.position = 'relative';
+            btn.style.left = (Math.random() - 0.5) * 100 + 'px';
+            btn.style.top = (Math.random() - 0.5) * 50 + 'px';
+        }
+
+        function closeSuccess() {
+            document.getElementById('successPopup').classList.remove('show');
+            document.body.innerHTML = '<div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-size: 2em; color: white; text-align: center; background: linear-gradient(45deg, #ff6b6b, #4ecdc4);"><div>🎉 Thank you for forgiving me, Riya! You can now leave this page. ❤️</div></div>';
+        }
+
+        function closeReject() {
+            document.getElementById('rejectPopup').classList.remove('show');
+            // Change the main message
+            const messageIndex = Math.min(rejectCount - 1, messages.length - 1);
+            document.getElementById('message').textContent = messages[messageIndex];
+        }
+
+        // Disable right-click context menu
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Disable common keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (!isAccepted) {
+                if (e.key === 'F5' || 
+                    (e.ctrlKey && (e.key === 'r' || e.key === 'R' || e.key === 'w' || e.key === 'W' || e.key === 't' || e.key === 'T')) ||
+                    e.key === 'F4' && e.altKey) {
+                    e.preventDefault();
+                    attempts++;
+                    document.getElementById('attemptCount').textContent = attempts;
+                    document.getElementById('sorryBox').classList.add('shake');
+                    setTimeout(() => {
+                        document.getElementById('sorryBox').classList.remove('shake');
+                    }, 500);
+                }
+            }
+        });
+
+        // Focus trap
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab' && !isAccepted) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
